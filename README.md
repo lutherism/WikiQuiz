@@ -4,16 +4,16 @@
 
 
 ###To run:
-requirements.txt contains the libraries/modules you'll need. You'll also need to download some data so that the nltk library works. To do this, start the Python console (ie. type `python` on the command line) and then: 
-
-    >>> import nltk
-    >>> nltk.download('averaged_perceptron_tagger')
-    >>> nltk.download('punkt')
-
-Run server.py to get the Flask endpoints working, and then open up index.html - that's all!
+```
+virtualenv env
+source env/bin/activate
+pip install -r requirements.txt
+python python/build.py
+python python/server.py
+```
 
 ###Potential Future Improvements:
-Choosing more appropriate multiple-choice options, especially for numbers 
+Choosing more appropriate multiple-choice options, especially for numbers
 
 _ie. if the answer is '1960s', show '1950s' as another option._
 
@@ -27,6 +27,3 @@ _ie. references to 'they' or 'he' would be replaced by what those pronouns are a
 
 ###Known limitations:
 The Python script will not handle certain Wikipedia pages correctly ("Harry Potter" for example). Most likely due to how I'm iterating through the parsed token tree in create_questions in Article.py. Certain articles have disambiguations and I decided to leave handling these out of scope. For both of the above you'll see on the console that I'm just returning a 500 error. If working further on the project I'd fix these and create less overarching exception handling than the try/except in server.py
-
-
-

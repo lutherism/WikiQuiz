@@ -1,10 +1,21 @@
 import requests, json
-from flask import Flask, request, Response
-
+import os
+from flask import Flask, request, Response, send_from_directory
 from Article import Article
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def index():
+    return send_from_directory('..', 'index.html')
+
+@app.route('/js/<path>', methods=['GET'])
+def serve_js(path):
+    return send_from_directory('../js', path)
+
+@app.route('/css/<path>', methods=['GET'])
+def serve_css(path):
+    return send_from_directory('../css', path)
 
 @app.route('/quiz/<article_name>/', methods = ['GET'])
 def get_quiz(article_name):
@@ -33,4 +44,4 @@ def get_quiz(article_name):
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
