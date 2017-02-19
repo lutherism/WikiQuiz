@@ -18,6 +18,7 @@ var curQuery;
 var correct_answer;
 
 function new_article_query(_data) {
+    ga('send', 'event', 'new.article', search.value);
     if (!_data) {
         make_request(search.value, new_article_query);
         curQuery = search.value;
@@ -42,6 +43,7 @@ function make_request(query, _callback) {
 }
 
 function load_question() {
+    ga('send', 'event', 'new.question');
     loadUIForNextQuestion()
     if (q_idx === 10) {
         q_idx = 0;
@@ -110,9 +112,12 @@ function convert_to_redacted(text, answer, label) {
 }
 
 function handleAnswerResponse(answer_given) {
+
     if (correct_answer === answer_given){
+        ga('send', 'event', 'answer.question', 'correct');
         answer_response_label.innerHTML = "Correct!";
     } else {
+        ga('send', 'event', 'answer.question', 'wrong');
         answer_response_label.innerHTML = "That's wrong...";
     }
     answer_response_label.style.display = "block";
