@@ -32,12 +32,12 @@ function new_article_query(_data) {
 // asynch GET request to server.py
 function make_request(query, _callback) {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
+    xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             _callback(JSON.parse(xmlHttp.responseText));
         }
     }
-    xmlHttp.open("GET", 'http://127.0.0.1:5000/quiz/' + query + "/", true); 
+    xmlHttp.open("GET", '/quiz/' + query + "/", true);
     xmlHttp.send(null);
 }
 
@@ -50,10 +50,10 @@ function load_question() {
         label =  data['questions'][q_idx][0];
 
         question_body.innerHTML = convert_to_redacted(
-            data['questions'][q_idx][1], 
+            data['questions'][q_idx][1],
             data['questions'][q_idx][2],
             label);
-        
+
         answers = [];
         correct_answer = data['questions'][q_idx][2];
         answers.push(correct_answer);
@@ -94,7 +94,7 @@ function convert_to_redacted(text, answer, label) {
     // spaced from prior word ie IN TAKANEZAWA , JAPAN
     // rather than IN TAKANEZAWA, JAPAN
     _answer = answer.replace(' ,',',');
-    
+
     if (label === "NUMBER") {
         // if the answer is a number, we want to match
         // the numerical portion, not $, %, etc
@@ -154,4 +154,3 @@ function shuffle(a) {
         a[j] = x;
     }
 }
-
